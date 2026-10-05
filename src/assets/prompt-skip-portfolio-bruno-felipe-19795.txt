@@ -1,0 +1,930 @@
+================================================================================
+PROMPT PARA O SKIP — PORTFÓLIO "BRUNO FELIPE"
+================================================================================
+
+Crie EXATAMENTE este site de portfólio. Ele já está pronto e testado: abaixo
+estão (1) a descrição completa do resultado esperado e (2) o CÓDIGO-FONTE
+COMPLETO de todos os arquivos. Use o código exatamente como está, sem
+simplificar, sem trocar classes, sem remover CSS e sem "melhorar" nada.
+O resultado final precisa ficar idêntico.
+
+REGRAS OBRIGATÓRIAS
+- Stack: React 19 + TypeScript + Vite + Tailwind CSS v4 (plugin @tailwindcss/vite).
+- Dependências: react, react-dom, lucide-react, clsx, tailwind-merge,
+  tw-animate-css, tailwindcss, @tailwindcss/vite, @vitejs/plugin-react.
+- O alias "@/" aponta para a pasta "src/".
+- Crie cada arquivo no caminho indicado, com o conteúdo exato.
+- NÃO remova nenhuma regra do src/index.css. As classes "macbook-*",
+  "custom-animate-*", ".loader-container", ".char", ".bg-grid" e ".reveal"
+  são essenciais: sem elas o MacBook 3D e as letras voando NÃO funcionam.
+- NÃO troque o MacBook por imagem, emoji ou ícone. Ele é feito só com divs + CSS 3D.
+- NÃO troque o efeito do nome por um fade simples. As letras devem voar em 3D.
+- Todos os textos em português do Brasil, exatamente como no código.
+- Se a sua plataforma não usa Vite, adapte só a configuração do projeto,
+  mantendo componentes, CSS e textos idênticos.
+
+--------------------------------------------------------------------------------
+PARTE 1 — COMO O SITE DEVE FICAR (para conferir o resultado)
+--------------------------------------------------------------------------------
+
+TELA INICIAL (altura total da tela, fundo preto #000)
+- Fundo com detalhes:
+  • grade sutil de linhas brancas (5% de opacidade), quadrados de 48px,
+    sumindo nas bordas com máscara radial;
+  • brilho roxo desfocado no centro (violet-600, 20% de opacidade, blur de 140px, 520px);
+  • cantoneiras finas nos 4 cantos e textos pequenos em fonte mono:
+    "BF / PORTFÓLIO" (em cima à esquerda), "● ONLINE" com bolinha verde
+    pulsando (em cima à direita) e "V1.0 — 2026" (embaixo à esquerda).
+    No celular esses textos de canto ficam escondidos.
+
+- SEQUÊNCIA DA ANIMAÇÃO:
+  1) No centro, um MacBook Air 3D cinza claro feito em CSS (150x96px, ampliado
+     1,7x no celular e 2,4x no desktop) gira em 3D e fecha/abre a tampa.
+     Cada ciclo dura 4,5s (linear) e o ciclo se repete 2 VEZES.
+  2) Quando o computador abre pela ÚLTIMA vez, ele para aberto de frente,
+     encolhe para o tamanho normal (1,25x no desktop) e fica com 70% de opacidade.
+  3) Logo abaixo, o nome "BRUNO FELIPE" se monta com tipografia cinética:
+     cada letra vem voando de uma posição 3D aleatória e se encaixa no lugar
+     (0,9s por letra, 0,05s de atraso entre letras). O nome é branco, extra
+     bold, e fica FIXO na tela depois de montado.
+  4) Cerca de 1,6s depois, aparece subindo o texto mono:
+     "DEV · 13 ANOS · IA NO DIA A DIA" (com os pontos em roxo).
+  5) Embaixo, no centro, aparece "ROLE" com uma seta pulando, que leva até a seção "sobre".
+  - Durante a intro existe o botão "PULAR INTRO →" no canto inferior direito.
+  - Com "reduzir movimento" ativado no sistema, a intro é pulada.
+
+SEÇÃO SOBRE (aparece ao rolar; os blocos surgem com fade subindo)
+- "01 — SOBRE MIM"
+  "Me chamo Bruno Felipe, tenho 13 anos, sou dev e uso IA no meu dia a dia."
+  (palavras-chave em branco; "IA" com gradiente de violeta para fúcsia)
+  "Domino vibe coding e sei o necessário de engenharia de software para
+   tirar uma ideia do papel e colocá-la no ar."
+- "02 — O QUE EU FAÇO": 4 cartões escuros (Vibe Coding / Engenharia de
+  Software / IA no dia a dia / Começando cedo), cada um com ícone roxo,
+  etiqueta em pílula e brilho roxo no hover.
+- "03 — WHOAMI": janela de terminal mostrando um JSON com os dados do
+  Bruno Felipe e um cursor piscando.
+- Pílulas com as tecnologias: React, TypeScript, Tailwind CSS, Vite, Git, IA generativa.
+- Rodapé: "© 2026 BRUNO FELIPE" e "FEITO COM REACT, TAILWIND E IA".
+- Precisa funcionar perfeitamente no celular, sem rolagem para os lados.
+
+--------------------------------------------------------------------------------
+PARTE 2 — CÓDIGO-FONTE COMPLETO (copie cada arquivo exatamente)
+--------------------------------------------------------------------------------
+
+==================== ARQUIVO: package.json ====================
+{
+  "name": "bruno-felipe-portfolio",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "clsx": "^2.1.1",
+    "lucide-react": "^1.52.0",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "tailwind-merge": "^3.7.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.3.3",
+    "@types/node": "^26.6.4",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "^6.1.2",
+    "tailwindcss": "^4.3.3",
+    "tw-animate-css": "^1.4.0",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.2"
+  }
+}
+
+==================== FIM DE: package.json ====================
+
+==================== ARQUIVO: index.html ====================
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Portfólio de Bruno Felipe — dev de 13 anos que usa IA no dia a dia." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>Bruno Felipe — Dev</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+
+==================== FIM DE: index.html ====================
+
+==================== ARQUIVO: vite.config.ts ====================
+import path from "path"
+import tailwindcss from "@tailwindcss/vite"
+import react from "@vitejs/plugin-react"
+import { defineConfig } from "vite"
+
+export default defineConfig({
+  plugins: [react(), tailwindcss()],
+  resolve: {
+    alias: {
+      "@": path.resolve(__dirname, "./src"),
+    },
+  },
+})
+
+==================== FIM DE: vite.config.ts ====================
+
+==================== ARQUIVO: tsconfig.json ====================
+{
+  "files": [],
+  "references": [{ "path": "./tsconfig.app.json" }, { "path": "./tsconfig.node.json" }],
+  "compilerOptions": {
+    "paths": { "@/*": ["./src/*"] }
+  }
+}
+
+==================== FIM DE: tsconfig.json ====================
+
+==================== ARQUIVO: tsconfig.app.json ====================
+{
+  "compilerOptions": {
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
+    "target": "ES2022",
+    "useDefineForClassFields": true,
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "skipLibCheck": true,
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "verbatimModuleSyntax": true,
+    "moduleDetection": "force",
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    "paths": { "@/*": ["./src/*"] }
+  },
+  "include": ["src"]
+}
+
+==================== FIM DE: tsconfig.app.json ====================
+
+==================== ARQUIVO: tsconfig.node.json ====================
+{
+  "compilerOptions": {
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.node.tsbuildinfo",
+    "target": "ES2023",
+    "lib": ["ES2023"],
+    "module": "ESNext",
+    "skipLibCheck": true,
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "verbatimModuleSyntax": true,
+    "moduleDetection": "force",
+    "noEmit": true,
+    "strict": true
+  },
+  "include": ["vite.config.ts"]
+}
+
+==================== FIM DE: tsconfig.node.json ====================
+
+==================== ARQUIVO: components.json ====================
+{
+  "$schema": "https://ui.shadcn.com/schema.json",
+  "style": "new-york",
+  "rsc": false,
+  "tsx": true,
+  "tailwind": {
+    "config": "",
+    "css": "src/index.css",
+    "baseColor": "neutral",
+    "cssVariables": true,
+    "prefix": ""
+  },
+  "aliases": {
+    "components": "@/components",
+    "utils": "@/lib/utils",
+    "ui": "@/components/ui",
+    "lib": "@/lib",
+    "hooks": "@/hooks"
+  },
+  "iconLibrary": "lucide"
+}
+
+==================== FIM DE: components.json ====================
+
+==================== ARQUIVO: public/favicon.svg ====================
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="#000"/><text x="32" y="42" text-anchor="middle" font-family="Arial, sans-serif" font-weight="700" font-size="28" fill="#fff">BF</text><circle cx="50" cy="14" r="4" fill="#a78bfa"/></svg>
+
+==================== FIM DE: public/favicon.svg ====================
+
+==================== ARQUIVO: src/main.tsx ====================
+import { StrictMode } from "react"
+import { createRoot } from "react-dom/client"
+import "./index.css"
+import App from "./App.tsx"
+
+createRoot(document.getElementById("root")!).render(
+  <StrictMode>
+    <App />
+  </StrictMode>,
+)
+
+==================== FIM DE: src/main.tsx ====================
+
+==================== ARQUIVO: src/vite-env.d.ts ====================
+/// <reference types="vite/client" />
+
+==================== FIM DE: src/vite-env.d.ts ====================
+
+==================== ARQUIVO: src/index.css ====================
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@theme {
+  --font-sans: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+
+html {
+  scroll-behavior: smooth;
+  color-scheme: dark;
+}
+
+body {
+  background: #000;
+  color: #fafafa;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ───────────── MacBook Air 3D ───────────── */
+
+.macbook-container { perspective: 500px; }
+.macbook-inner { transform-style: preserve-3d; transform: rotateX(-20deg) rotateY(0deg) rotateZ(0deg); }
+.macbook-screen { transform-style: preserve-3d; transform-origin: 50% 93px; transform: rotateX(0deg); }
+.macbook-screen-face-one { transform: translateZ(2px); }
+.macbook-body { transform-style: preserve-3d; transform-origin: 50% bottom; transform: rotateX(-90deg); }
+.macbook-body-face-one { transform-style: preserve-3d; transform: translateZ(-2px); }
+.macbook-keyboard { transform-style: preserve-3d; }
+.macbook-key { transform: translateZ(-2px); }
+.macbook-shadow { transform: rotateX(80deg) rotateY(0deg) rotateZ(0deg); }
+
+.custom-animate-rotate,
+.custom-animate-lid-screen,
+.custom-animate-lid-macbody,
+.custom-animate-lid-keyboard-area,
+.custom-animate-screen-shade,
+.custom-animate-keys,
+.custom-animate-macbook-shadow {
+  animation-duration: var(--mac-duration, 5s);
+  animation-iteration-count: var(--mac-iterations, infinite);
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+.custom-animate-rotate { animation-name: rotate; }
+.custom-animate-lid-screen { animation-name: lid-screen; }
+.custom-animate-lid-macbody { animation-name: lid-macbody; }
+.custom-animate-lid-keyboard-area { animation-name: lid-keyboard-area; }
+.custom-animate-screen-shade { animation-name: screen-shade; }
+.custom-animate-keys { animation-name: keys; }
+.custom-animate-macbook-shadow { animation-name: macbook-shadow-animation; }
+
+@keyframes rotate {
+  0% { transform: rotateX(-20deg) rotateY(0deg) rotateZ(0deg); }
+  5% { transform: rotateX(-20deg) rotateY(-20deg) rotateZ(0deg); }
+  20% { transform: rotateX(30deg) rotateY(200deg) rotateZ(0deg); }
+  25% { transform: rotateX(-60deg) rotateY(150deg) rotateZ(0deg); }
+  60% { transform: rotateX(-20deg) rotateY(130deg) rotateZ(0deg); }
+  65% { transform: rotateX(-20deg) rotateY(120deg) rotateZ(0deg); }
+  80% { transform: rotateX(-20deg) rotateY(375deg) rotateZ(0deg); }
+  85% { transform: rotateX(-20deg) rotateY(357deg) rotateZ(0deg); }
+  87% { transform: rotateX(-20deg) rotateY(360deg) rotateZ(0deg); }
+  100% { transform: rotateX(-20deg) rotateY(360deg) rotateZ(0deg); }
+}
+
+@keyframes lid-screen {
+  0% { transform: rotateX(0deg); background-position: left bottom; }
+  5% { transform: rotateX(50deg); background-position: left bottom; }
+  20% { transform: rotateX(-90deg); background-position: -150px top; }
+  25% { transform: rotateX(15deg); background-position: left bottom; }
+  30% { transform: rotateX(-5deg); background-position: right top; }
+  38% { transform: rotateX(5deg); background-position: right top; }
+  48% { transform: rotateX(0deg); background-position: right top; }
+  90% { transform: rotateX(0deg); background-position: right top; }
+  100% { transform: rotateX(0deg); background-position: right center; }
+}
+
+@keyframes lid-macbody {
+  0% { transform: rotateX(-90deg); }
+  50% { transform: rotateX(-90deg); }
+  100% { transform: rotateX(-90deg); }
+}
+
+@keyframes lid-keyboard-area {
+  0% { background-color: #dfdfdf; }
+  50% { background-color: #bbb; }
+  100% { background-color: #dfdfdf; }
+}
+
+@keyframes screen-shade {
+  0% { background-position: -20px 0px; }
+  5% { background-position: -40px 0px; }
+  20% { background-position: 200px 0; }
+  50% { background-position: -200px 0; }
+  80% { background-position: 0px 0px; }
+  85% { background-position: -30px 0; }
+  90% { background-position: -20px 0; }
+  100% { background-position: -20px 0px; }
+}
+
+@keyframes keys {
+  0% { box-shadow: 0 -2px 0 #222; }
+  5% { box-shadow: 1px -1px 0 #222; }
+  20% { box-shadow: -1px 1px 0 #222; }
+  25% { box-shadow: -1px 1px 0 #222; }
+  60% { box-shadow: -1px 1px 0 #222; }
+  80% { box-shadow: 0 -2px 0 #222; }
+  85% { box-shadow: 0 -2px 0 #222; }
+  87% { box-shadow: 0 -2px 0 #222; }
+  100% { box-shadow: 0 -2px 0 #222; }
+}
+
+@keyframes macbook-shadow-animation {
+  0% { transform: rotateX(80deg) rotateY(0deg) rotateZ(0deg); box-shadow: 0 0 60px 40px rgba(0,0,0,0.3); }
+  5% { transform: rotateX(80deg) rotateY(10deg) rotateZ(0deg); box-shadow: 0 0 60px 40px rgba(0,0,0,0.3); }
+  20% { transform: rotateX(30deg) rotateY(-20deg) rotateZ(-20deg); box-shadow: 0 0 50px 30px rgba(0,0,0,0.3); }
+  25% { transform: rotateX(80deg) rotateY(-20deg) rotateZ(50deg); box-shadow: 0 0 35px 15px rgba(0,0,0,0.1); }
+  60% { transform: rotateX(80deg) rotateY(0deg) rotateZ(-50deg) translateX(30px); box-shadow: 0 0 60px 40px rgba(0,0,0,0.3); }
+  100% { transform: rotateX(80deg) rotateY(0deg) rotateZ(0deg); box-shadow: 0 0 60px 40px rgba(0,0,0,0.3); }
+}
+
+/* ───────────── Kinetic typography ───────────── */
+
+.loader-container {
+  perspective: 1000px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.loader-container h1 { transform-style: preserve-3d; }
+.loader-container .char {
+  display: inline-block;
+  opacity: 0;
+  animation-duration: 0.9s;
+  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  animation-fill-mode: forwards;
+}
+
+@keyframes fly-in {
+  from { opacity: 0; transform: var(--transform-from); }
+  to { opacity: 1; transform: translateZ(0) rotateX(0) rotateY(0); }
+}
+
+@keyframes fly-out {
+  from { opacity: 1; transform: translateZ(0) rotateX(0) rotateY(0); }
+  to { opacity: 0; transform: var(--transform-to); }
+}
+
+/* ───────────── Page details ───────────── */
+
+.bg-grid {
+  background-image:
+    linear-gradient(to right, rgba(255,255,255,0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255,255,255,0.05) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse at center, #000 20%, transparent 70%);
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.reveal.is-visible { opacity: 1; transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal { opacity: 1; transform: none; transition: none; }
+}
+
+==================== FIM DE: src/index.css ====================
+
+==================== ARQUIVO: src/lib/utils.ts ====================
+import { clsx, type ClassValue } from "clsx"
+import { twMerge } from "tailwind-merge"
+
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs))
+}
+
+==================== FIM DE: src/lib/utils.ts ====================
+
+==================== ARQUIVO: src/hooks/use-reveal.ts ====================
+import { useEffect } from "react"
+
+/** Adds `is-visible` to every `.reveal` element once it scrolls into view. */
+export function useReveal() {
+  useEffect(() => {
+    const elements = document.querySelectorAll<HTMLElement>(".reveal")
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible")
+            observer.unobserve(entry.target)
+          }
+        }
+      },
+      { threshold: 0.15 },
+    )
+    elements.forEach((el) => observer.observe(el))
+    return () => observer.disconnect()
+  }, [])
+}
+
+==================== FIM DE: src/hooks/use-reveal.ts ====================
+
+==================== ARQUIVO: src/components/ui/animated-3d-mac-book-air.tsx ====================
+import React from 'react';
+import { cn } from '@/lib/utils';
+
+interface MacbookProps {
+  /** How many times the open/close cycle plays. Defaults to infinite. */
+  iterations?: number | 'infinite';
+  /** Duration of one cycle in seconds. */
+  duration?: number;
+  /** Fired once the last cycle finishes (never fires when infinite). */
+  onAnimationComplete?: () => void;
+  className?: string;
+}
+
+const Macbook: React.FC<MacbookProps> = ({
+  iterations = 'infinite',
+  duration = 5,
+  onAnimationComplete,
+  className,
+}) => {
+  // Base classes for keys, animation will be added via custom-animate-keys
+  const keyBaseClasses = "w-[6px] h-[6px] bg-[#444] float-left m-[1px] rounded-[2px] shadow-[0_-2px_0_#222] macbook-key custom-animate-keys";
+  // Note: macbook-key applies transform: translateZ(-2px) from index.css
+  // custom-animate-keys applies the animation.
+
+  const timing = {
+    '--mac-iterations': String(iterations),
+    '--mac-duration': `${duration}s`,
+  } as React.CSSProperties;
+
+  return (
+    // `perspective` is applied by `macbook-container` class from index.css
+    <div
+      className={cn("macbook-container w-[150px] h-[96px] absolute left-1/2 top-1/2 mt-[-85px] ml-[-78px]", className)}
+      style={timing}
+    >
+      {/*
+        `transform-style: preserve-3d` applied by `macbook-inner` from index.css.
+        Initial transform `rotateX(-20deg) rotateY(0deg) rotateZ(0deg)` is the 0% state of `rotate` animation.
+      */}
+      <div
+        className="macbook-inner custom-animate-rotate z-20 absolute w-[150px] h-[96px] left-0 top-0"
+        onAnimationEnd={(e) => {
+          // animationend bubbles up from every animated child; only react to our own
+          if (e.target === e.currentTarget) onAnimationComplete?.();
+        }}
+      >
+        {/* Screen */}
+        {/*
+          `transform-style: preserve-3d` and `transform-origin` applied by `macbook-screen` from index.css.
+          Initial transform `rotateX(0deg)` is 0% state of `lid-screen` animation.
+        */}
+        <div className={`macbook-screen custom-animate-lid-screen w-[150px] h-[96px] absolute left-0 bottom-0 rounded-[7px] bg-[#ddd] 
+                        bg-[linear-gradient(45deg,rgba(0,0,0,0.34)_0%,rgba(0,0,0,0)_100%)] bg-left-bottom bg-[length:300px_300px] 
+                        shadow-[inset_0_3px_7px_rgba(255,255,255,0.5)]`}>
+          {/* `transform: translateZ(2px)` applied by `macbook-screen-face-one` from index.css */}
+          <div className={`macbook-screen-face-one w-[150px] h-[96px] absolute left-0 bottom-0 rounded-[7px] bg-[#d3d3d3]
+                          bg-[linear-gradient(45deg,rgba(0,0,0,0.24)_0%,rgba(0,0,0,0)_100%)]`}>
+            <div className="w-[3px] h-[3px] rounded-full bg-black absolute left-1/2 top-[4px] ml-[-1.5px]"></div>
+            <div className="w-[130px] h-[74px] m-[10px] bg-black bg-[length:100%_100%] rounded-[1px] relative shadow-[inset_0_0_2px_rgba(0,0,0,1)]">
+              <div className={`custom-animate-screen-shade absolute left-0 top-0 w-[130px] h-[74px] 
+                              bg-[linear-gradient(-135deg,rgba(255,255,255,0)_0%,rgba(255,255,255,0.1)_47%,rgba(255,255,255,0)_48%)] 
+                              bg-[length:300px_200px] bg-[position:0px_0px]`}></div>
+            </div>
+            <span className="absolute top-[85px] left-[57px] text-[6px] text-[#666]">MacBook Air</span>
+          </div>
+        </div>
+
+        {/* Body */}
+        {/*
+          `transform-style: preserve-3d`, `transform-origin`, and initial `transform: rotateX(-90deg)` applied by `macbook-body` from index.css.
+        */}
+        <div className={`macbook-body custom-animate-lid-macbody w-[150px] h-[96px] absolute left-0 bottom-0 rounded-[7px] bg-[#cbcbcb]
+                        bg-[linear-gradient(45deg,rgba(0,0,0,0.24)_0%,rgba(0,0,0,0)_100%)]`}>
+          {/*
+            `transform-style: preserve-3d` and `transform: translateZ(-2px)` applied by `macbook-body-face-one` from index.css.
+            Animation for background color.
+          */}
+          <div className={`macbook-body-face-one custom-animate-lid-keyboard-area w-[150px] h-[96px] absolute left-0 bottom-0 rounded-[7px] bg-[#dfdfdf] 
+                          bg-[linear-gradient(30deg,rgba(0,0,0,0.24)_0%,rgba(0,0,0,0)_100%)]`}>
+            <div className="w-[40px] h-[31px] absolute left-1/2 top-1/2 rounded-[4px] mt-[-44px] ml-[-18px] bg-[#cdcdcd] 
+                            bg-[linear-gradient(30deg,rgba(0,0,0,0.24)_0%,rgba(0,0,0,0)_100%)] 
+                            shadow-[inset_0_0_3px_#888]">
+            </div>
+            {/* `transform-style: preserve-3d` applied by `macbook-keyboard` from index.css */}
+            <div className={`macbook-keyboard w-[130px] h-[45px] absolute left-[7px] top-[41px] rounded-[4px] bg-[#cdcdcd] 
+                            bg-[linear-gradient(30deg,rgba(0,0,0,0.24)_0%,rgba(0,0,0,0)_100%)] 
+                            shadow-[inset_0_0_3px_#777] pl-[2px] overflow-hidden`}>
+              {Array.from({ length: 58 }).map((_, i) => (
+                <div key={`key-norm-${i}`} className={keyBaseClasses}></div>
+              ))}
+              <div key="key-space" className={`${keyBaseClasses} w-[45px]`}></div>
+              {Array.from({ length: 16 }).map((_, i) => (
+                <div key={`key-f-${i}`} className={`${keyBaseClasses} h-[3px]`}></div>
+              ))}
+            </div>
+          </div>
+          <div className="w-[5px] h-[5px] bg-[#333] rounded-full absolute left-[20px] top-[20px]"></div>
+          <div className="w-[5px] h-[5px] bg-[#333] rounded-full absolute right-[20px] top-[20px]"></div>
+          <div className="w-[5px] h-[5px] bg-[#333] rounded-full absolute right-[20px] bottom-[20px]"></div>
+          <div className="w-[5px] h-[5px] bg-[#333] rounded-full absolute left-[20px] bottom-[20px]"></div>
+        </div>
+      </div>
+      {/*
+        Initial `transform` applied by `macbook-shadow` from index.css.
+      */}
+      <div className={`macbook-shadow custom-animate-macbook-shadow absolute w-[60px] h-[0px] left-[40px] top-[160px] 
+                      shadow-[0_0_60px_40px_rgba(0,0,0,0.3)]`}>
+      </div>
+    </div>
+  );
+};
+
+export {Macbook}
+
+==================== FIM DE: src/components/ui/animated-3d-mac-book-air.tsx ====================
+
+==================== ARQUIVO: src/components/ui/loading-animation.tsx ====================
+import { useEffect, useRef } from 'react';
+import { cn } from '@/lib/utils';
+
+interface KineticTypographyLoaderProps {
+    words?: string[];
+    /** When false, the last word assembles and stays on screen. */
+    loop?: boolean;
+    className?: string;
+}
+
+const DEFAULT_WORDS = ["LOADING", "ASSEMBLING", "FINALIZING"];
+
+export const KineticTypographyLoader = ({
+    words = DEFAULT_WORDS,
+    loop = true,
+    className,
+}: KineticTypographyLoaderProps) => {
+    const loaderTextRef = useRef<HTMLHeadingElement>(null);
+    const wordsKey = words.join('|');
+
+    useEffect(() => {
+        const loaderText = loaderTextRef.current;
+        if (!loaderText) return;
+
+        let currentWordIndex = 0;
+        let animationTimeout: ReturnType<typeof setTimeout> | undefined;
+        let wordCycleTimeout: ReturnType<typeof setTimeout> | undefined;
+
+        const randomTransform = () => {
+            const x = (Math.random() - 0.5) * 800;
+            const y = (Math.random() - 0.5) * 800;
+            const z = (Math.random() - 0.5) * 800;
+            const rotX = (Math.random() - 0.5) * 360;
+            const rotY = (Math.random() - 0.5) * 360;
+            return `translate3d(${x}px, ${y}px, ${z}px) rotateX(${rotX}deg) rotateY(${rotY}deg)`;
+        };
+
+        function animateWord() {
+            const word = words[currentWordIndex];
+            loaderText!.innerHTML = ''; // Clear previous word
+
+            const chars = word.split('').map((char, index) => {
+                const span = document.createElement('span');
+                span.className = 'char';
+                // Keep spaces from collapsing inside inline-block spans
+                span.textContent = char === ' ' ? ' ' : char;
+
+                span.style.setProperty('--transform-from', randomTransform());
+                span.style.animationName = 'fly-in';
+                span.style.animationDelay = `${index * 0.05}s`;
+                span.style.animationPlayState = 'running';
+
+                loaderText!.appendChild(span);
+                return span;
+            });
+
+            const isLast = currentWordIndex === words.length - 1;
+            if (isLast && !loop) return;
+
+            animationTimeout = setTimeout(() => {
+                chars.forEach((span, index) => {
+                    span.style.setProperty('--transform-to', randomTransform());
+                    span.style.animationName = 'fly-out';
+                    span.style.animationDelay = `${(chars.length - index) * 0.05}s`;
+                });
+            }, 2500);
+
+            wordCycleTimeout = setTimeout(() => {
+                currentWordIndex = (currentWordIndex + 1) % words.length;
+                animateWord();
+            }, 3500);
+        }
+
+        animateWord();
+
+        // Cleanup function to clear timeouts when the component unmounts
+        return () => {
+            clearTimeout(animationTimeout);
+            clearTimeout(wordCycleTimeout);
+        };
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [wordsKey, loop]);
+
+    return (
+        <div className="loader-container">
+            <h1
+                ref={loaderTextRef}
+                aria-label={words[words.length - 1]}
+                className={cn("text-4xl sm:text-6xl lg:text-8xl font-extrabold text-white whitespace-nowrap", className)}
+            >
+            </h1>
+        </div>
+    );
+};
+
+==================== FIM DE: src/components/ui/loading-animation.tsx ====================
+
+==================== ARQUIVO: src/components/hero.tsx ====================
+import { useEffect, useState } from "react"
+import { ChevronDown } from "lucide-react"
+import { Macbook } from "@/components/ui/animated-3d-mac-book-air"
+import { KineticTypographyLoader } from "@/components/ui/loading-animation"
+import { cn } from "@/lib/utils"
+
+const prefersReducedMotion = () =>
+  typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches
+
+export function Hero() {
+  // "intro": the MacBook opens and closes; "name": last opening finished, name assembles
+  const [phase, setPhase] = useState<"intro" | "name">(() => (prefersReducedMotion() ? "name" : "intro"))
+  const [skipped, setSkipped] = useState(prefersReducedMotion)
+  const [showDetails, setShowDetails] = useState(false)
+
+  useEffect(() => {
+    if (phase !== "name") return
+    const t = setTimeout(() => setShowDetails(true), 1600)
+    return () => clearTimeout(t)
+  }, [phase])
+
+  return (
+    <section className="relative flex min-h-svh flex-col items-center justify-center overflow-hidden bg-black px-4">
+      {/* Background details */}
+      <div aria-hidden className="bg-grid pointer-events-none absolute inset-0" />
+      <div
+        aria-hidden
+        className={cn(
+          "pointer-events-none absolute left-1/2 top-1/2 h-[520px] w-[520px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-violet-600/20 blur-[140px] transition-opacity duration-[2000ms]",
+          phase === "name" ? "opacity-100" : "opacity-40",
+        )}
+      />
+      <HudCorners />
+
+      {/* MacBook */}
+      <div
+        className={cn(
+          "relative h-[180px] w-[150px] transition-all duration-1000 ease-out",
+          phase === "intro" ? "scale-[1.7] sm:scale-[2.4]" : "-mb-2 scale-100 opacity-70 sm:scale-125",
+        )}
+      >
+        <Macbook
+          // 0 iterations parks it on the first frame, which is the same open pose the last cycle ends on
+          iterations={skipped ? 0 : 2}
+          duration={4.5}
+          onAnimationComplete={() => setPhase("name")}
+        />
+      </div>
+
+      {/* Name */}
+      <div className={cn("relative z-10 mt-6 min-h-[1.2em] sm:mt-10", phase === "intro" && "invisible")}>
+        {phase === "name" && (
+          <KineticTypographyLoader words={["BRUNO FELIPE"]} loop={false} className="tracking-tight" />
+        )}
+      </div>
+
+      <p
+        className={cn(
+          "relative z-10 mt-6 font-mono text-xs uppercase tracking-[0.3em] text-neutral-400 transition-all duration-1000 sm:text-sm",
+          showDetails ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0",
+        )}
+      >
+        Dev <span className="text-violet-400">·</span> 13 anos <span className="text-violet-400">·</span> IA no dia a dia
+      </p>
+
+      {phase === "intro" && (
+        <button
+          onClick={() => {
+            setSkipped(true)
+            setPhase("name")
+          }}
+          className="absolute bottom-8 right-6 z-10 font-mono sm:bottom-14 sm:right-12 text-[11px] uppercase tracking-widest text-neutral-600 transition-colors hover:text-neutral-300"
+        >
+          Pular intro →
+        </button>
+      )}
+
+      <a
+        href="#sobre"
+        aria-label="Rolar para baixo"
+        className={cn(
+          "absolute bottom-8 left-1/2 flex -translate-x-1/2 flex-col items-center gap-1 font-mono text-[10px] uppercase tracking-[0.3em] text-neutral-500 transition-opacity duration-1000 hover:text-white",
+          showDetails ? "opacity-100" : "pointer-events-none opacity-0",
+        )}
+      >
+        Role
+        <ChevronDown className="size-5 animate-bounce" />
+      </a>
+    </section>
+  )
+}
+
+function HudCorners() {
+  const label = "font-mono text-[10px] uppercase tracking-[0.25em] text-neutral-600"
+  return (
+    <div aria-hidden className="pointer-events-none absolute inset-0 hidden p-6 sm:block">
+      <span className="absolute left-6 top-6 h-4 w-4 border-l border-t border-neutral-700" />
+      <span className="absolute right-6 top-6 h-4 w-4 border-r border-t border-neutral-700" />
+      <span className="absolute bottom-6 left-6 h-4 w-4 border-b border-l border-neutral-700" />
+      <span className="absolute bottom-6 right-6 h-4 w-4 border-b border-r border-neutral-700" />
+      <span className={cn(label, "absolute left-12 top-6")}>BF / Portfólio</span>
+      <span className={cn(label, "absolute right-12 top-6 flex items-center gap-2")}>
+        <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-emerald-400" /> Online
+      </span>
+      <span className={cn(label, "absolute bottom-6 left-12")}>v1.0 — 2026</span>
+    </div>
+  )
+}
+
+==================== FIM DE: src/components/hero.tsx ====================
+
+==================== ARQUIVO: src/components/about.tsx ====================
+import type { LucideIcon } from "lucide-react"
+import { Bot, Layers, Rocket, Sparkles } from "lucide-react"
+
+const skills: { icon: LucideIcon; tag: string; title: string; text: string }[] = [
+  {
+    icon: Sparkles,
+    tag: "Domino",
+    title: "Vibe Coding",
+    text: "Transformo ideias em código conversando com IA: descrevo o que quero, testo, ajusto e itero até ficar do jeito certo.",
+  },
+  {
+    icon: Layers,
+    tag: "O necessário",
+    title: "Engenharia de Software",
+    text: "Sei organizar um projeto: componentes reutilizáveis, tipagem com TypeScript, versionamento com Git e código fácil de manter.",
+  },
+  {
+    icon: Bot,
+    tag: "Todo dia",
+    title: "IA no dia a dia",
+    text: "Uso IA para estudar, prototipar, revisar código e resolver problemas — ela é minha parceira de trabalho, não um atalho.",
+  },
+  {
+    icon: Rocket,
+    tag: "13 anos",
+    title: "Começando cedo",
+    text: "Comecei jovem e sigo construindo. Cada projeto é um degrau a mais — e este portfólio é um deles.",
+  },
+]
+
+const stack = ["React", "TypeScript", "Tailwind CSS", "Vite", "Git", "IA generativa"]
+
+export function About() {
+  return (
+    <section id="sobre" className="relative bg-black px-4 py-28 sm:py-36">
+      <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-neutral-800 to-transparent" />
+
+      <div className="mx-auto max-w-5xl">
+        <p className="reveal font-mono text-xs uppercase tracking-[0.3em] text-violet-400">01 — Sobre mim</p>
+        <h2 className="reveal mt-6 text-3xl font-medium leading-tight text-neutral-400 sm:text-5xl">
+          Me chamo <span className="text-white">Bruno Felipe</span>, tenho{" "}
+          <span className="text-white">13 anos</span>, sou <span className="text-white">dev</span> e uso{" "}
+          <span className="bg-gradient-to-r from-violet-400 to-fuchsia-400 bg-clip-text text-transparent">IA</span> no meu
+          dia a dia.
+        </h2>
+        <p className="reveal mt-6 max-w-2xl text-lg text-neutral-500">
+          Domino vibe coding e sei o necessário de engenharia de software para tirar uma ideia do papel e colocá-la no ar.
+        </p>
+
+        <p className="reveal mt-24 font-mono text-xs uppercase tracking-[0.3em] text-violet-400">02 — O que eu faço</p>
+        <div className="mt-8 grid gap-4 sm:grid-cols-2">
+          {skills.map(({ icon: Icon, tag, title, text }, i) => (
+            <article
+              key={title}
+              className="reveal group relative overflow-hidden rounded-2xl border border-neutral-800 bg-neutral-950 p-6 transition-colors hover:border-neutral-600 sm:p-8"
+              style={{ transitionDelay: `${i * 80}ms` }}
+            >
+              <div
+                aria-hidden
+                className="absolute -right-16 -top-16 h-40 w-40 rounded-full bg-violet-600/0 blur-3xl transition-colors duration-500 group-hover:bg-violet-600/25"
+              />
+              <div className="flex items-center justify-between">
+                <Icon className="size-6 text-violet-400" strokeWidth={1.5} />
+                <span className="rounded-full border border-neutral-800 px-3 py-1 font-mono text-[10px] uppercase tracking-widest text-neutral-400">
+                  {tag}
+                </span>
+              </div>
+              <h3 className="mt-8 text-xl font-bold text-white sm:text-2xl">{title}</h3>
+              <p className="mt-3 leading-relaxed text-neutral-400">{text}</p>
+            </article>
+          ))}
+        </div>
+
+        <p className="reveal mt-24 font-mono text-xs uppercase tracking-[0.3em] text-violet-400">03 — whoami</p>
+        <div className="reveal mt-8 overflow-hidden rounded-2xl border border-neutral-800 bg-neutral-950">
+          <div className="flex items-center gap-2 border-b border-neutral-800 px-4 py-3">
+            <span className="size-3 rounded-full bg-neutral-700" />
+            <span className="size-3 rounded-full bg-neutral-700" />
+            <span className="size-3 rounded-full bg-neutral-700" />
+            <span className="ml-3 font-mono text-xs text-neutral-500">~/bruno — zsh</span>
+          </div>
+          <pre className="overflow-x-auto p-6 font-mono text-sm leading-7 text-neutral-300">
+            <span className="text-emerald-400">❯</span> whoami{"\n"}
+            {"{\n"}
+            {"  "}<span className="text-violet-300">"nome"</span>: <span className="text-amber-200">"Bruno Felipe"</span>,{"\n"}
+            {"  "}<span className="text-violet-300">"idade"</span>: <span className="text-sky-300">13</span>,{"\n"}
+            {"  "}<span className="text-violet-300">"funcao"</span>: <span className="text-amber-200">"dev"</span>,{"\n"}
+            {"  "}<span className="text-violet-300">"superpoder"</span>: <span className="text-amber-200">"vibe coding"</span>,{"\n"}
+            {"  "}<span className="text-violet-300">"usaIA"</span>: <span className="text-sky-300">true</span>{"\n"}
+            {"}\n"}
+            <span className="text-emerald-400">❯</span> <span className="inline-block h-4 w-2 translate-y-0.5 animate-pulse bg-neutral-300" />
+          </pre>
+        </div>
+
+        <div className="reveal mt-10 flex flex-wrap gap-2">
+          {stack.map((s) => (
+            <span key={s} className="rounded-full border border-neutral-800 px-4 py-2 font-mono text-xs text-neutral-400">
+              {s}
+            </span>
+          ))}
+        </div>
+      </div>
+
+      <footer className="mx-auto mt-32 flex max-w-5xl flex-col items-center justify-between gap-2 border-t border-neutral-900 pt-8 font-mono text-[11px] uppercase tracking-widest text-neutral-600 sm:flex-row">
+        <span>© {new Date().getFullYear()} Bruno Felipe</span>
+        <span>Feito com React, Tailwind e IA</span>
+      </footer>
+    </section>
+  )
+}
+
+==================== FIM DE: src/components/about.tsx ====================
+
+==================== ARQUIVO: src/App.tsx ====================
+import { About } from "@/components/about"
+import { Hero } from "@/components/hero"
+import { useReveal } from "@/hooks/use-reveal"
+
+export default function App() {
+  useReveal()
+
+  return (
+    <main className="bg-black">
+      <Hero />
+      <About />
+    </main>
+  )
+}
+
+==================== FIM DE: src/App.tsx ====================
+
+--------------------------------------------------------------------------------
+CHECKLIST FINAL (confira antes de entregar)
+--------------------------------------------------------------------------------
+[ ] Fundo todo preto, com grade sutil, brilho roxo e textos nos cantos.
+[ ] O MacBook 3D gira e abre/fecha 2 vezes, depois para aberto de frente.
+[ ] "BRUNO FELIPE" se monta com as letras voando em 3D e fica fixo.
+[ ] "DEV · 13 ANOS · IA NO DIA A DIA" aparece depois do nome.
+[ ] A seta "ROLE" leva até a seção Sobre.
+[ ] O botão "PULAR INTRO →" funciona.
+[ ] Seção Sobre, 4 cartões, terminal whoami, pílulas e rodapé aparecem ao rolar.
+[ ] No celular está tudo legível e sem rolagem para os lados.
+================================================================================

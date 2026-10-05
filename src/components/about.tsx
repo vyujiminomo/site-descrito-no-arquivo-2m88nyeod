@@ -34,7 +34,17 @@ const skills: { number: string; icon: LucideIcon; tag: string; title: string; te
   },
 ]
 
-const stack = ['React', 'TypeScript', 'Tailwind CSS', 'Vite', 'Git', 'IA generativa']
+const stack = [
+  'C#',
+  'Python',
+  'Java',
+  'TypeScript',
+  'React',
+  'Tailwind CSS',
+  'Vite',
+  'Git',
+  'IA generativa',
+]
 
 export function About() {
   return (

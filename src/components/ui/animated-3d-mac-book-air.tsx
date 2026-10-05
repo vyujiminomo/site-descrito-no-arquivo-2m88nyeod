@@ -26,6 +26,8 @@ const Macbook: React.FC<MacbookProps> = ({
   const timing = {
     '--mac-iterations': iterations === 'infinite' ? 'infinite' : String(iterations),
     '--mac-duration': `${duration}s`,
+    animationIterationCount: iterations === 'infinite' ? 'infinite' : iterations,
+    animationDuration: `${duration}s`,
   } as React.CSSProperties
 
   return (
@@ -43,6 +45,10 @@ const Macbook: React.FC<MacbookProps> = ({
       */}
       <div
         className="macbook-inner custom-animate-rotate z-20 absolute w-[150px] h-[96px] left-0 top-0"
+        style={{
+          animationDuration: `${duration}s`,
+          animationIterationCount: iterations === 'infinite' ? 'infinite' : iterations,
+        }}
         onAnimationEnd={(e) => {
           // animationend bubbles up from every animated child; only react to our own
           if (e.target === e.currentTarget) onAnimationComplete?.()
@@ -58,6 +64,10 @@ const Macbook: React.FC<MacbookProps> = ({
           className={`macbook-screen custom-animate-lid-screen w-[150px] h-[96px] absolute left-0 bottom-0 rounded-[7px] bg-[#ddd] 
                         bg-[linear-gradient(45deg,rgba(0,0,0,0.34)_0%,rgba(0,0,0,0)_100%)] bg-left-bottom bg-[length:300px_300px] 
                         shadow-[inset_0_3px_7px_rgba(255,255,255,0.5)]`}
+          style={{
+            animationDuration: `${duration}s`,
+            animationIterationCount: iterations === 'infinite' ? 'infinite' : iterations,
+          }}
         >
           {/* `transform: translateZ(2px)` applied by `macbook-screen-face-one` from index.css */}
           <div
@@ -70,6 +80,10 @@ const Macbook: React.FC<MacbookProps> = ({
                 className={`custom-animate-screen-shade absolute left-0 top-0 w-[130px] h-[74px] 
                               bg-[linear-gradient(-135deg,rgba(255,255,255,0)_0%,rgba(255,255,255,0.1)_47%,rgba(255,255,255,0)_48%)] 
                               bg-[length:300px_200px] bg-[position:0px_0px]`}
+                style={{
+                  animationDuration: `${duration}s`,
+                  animationIterationCount: iterations === 'infinite' ? 'infinite' : iterations,
+                }}
               ></div>
             </div>
             <span className="absolute top-[85px] left-[57px] text-[6px] text-[#666]">
@@ -85,6 +99,10 @@ const Macbook: React.FC<MacbookProps> = ({
         <div
           className={`macbook-body custom-animate-lid-macbody w-[150px] h-[96px] absolute left-0 bottom-0 rounded-[7px] bg-[#cbcbcb]
                         bg-[linear-gradient(45deg,rgba(0,0,0,0.24)_0%,rgba(0,0,0,0)_100%)]`}
+          style={{
+            animationDuration: `${duration}s`,
+            animationIterationCount: iterations === 'infinite' ? 'infinite' : iterations,
+          }}
         >
           {/*
             `transform-style: preserve-3d` and `transform: translateZ(-2px)` applied by `macbook-body-face-one` from index.css.
@@ -93,6 +111,10 @@ const Macbook: React.FC<MacbookProps> = ({
           <div
             className={`macbook-body-face-one custom-animate-lid-keyboard-area w-[150px] h-[96px] absolute left-0 bottom-0 rounded-[7px] bg-[#dfdfdf] 
                           bg-[linear-gradient(30deg,rgba(0,0,0,0.24)_0%,rgba(0,0,0,0)_100%)]`}
+            style={{
+              animationDuration: `${duration}s`,
+              animationIterationCount: iterations === 'infinite' ? 'infinite' : iterations,
+            }}
           >
             <div
               className="w-[40px] h-[31px] absolute left-1/2 top-1/2 rounded-[4px] mt-[-44px] ml-[-18px] bg-[#cdcdcd] 
@@ -126,6 +148,10 @@ const Macbook: React.FC<MacbookProps> = ({
       <div
         className={`macbook-shadow custom-animate-macbook-shadow absolute w-[60px] h-[0px] left-[40px] top-[160px] 
                       shadow-[0_0_60px_40px_rgba(0,0,0,0.3)]`}
+        style={{
+          animationDuration: `${duration}s`,
+          animationIterationCount: iterations === 'infinite' ? 'infinite' : iterations,
+        }}
       ></div>
     </div>
   )

@@ -1,8 +1,3 @@
-@theme {
-  --font-sans: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
-  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
-}
-
 html {
   scroll-behavior: smooth;
   color-scheme: dark;
@@ -58,8 +53,8 @@ body {
 .custom-animate-screen-shade,
 .custom-animate-keys,
 .custom-animate-macbook-shadow {
-  animation-duration: var(--mac-duration, 5s);
-  animation-iteration-count: var(--mac-iterations, infinite);
+  animation-duration: var(--mac-duration, 4.5s);
+  animation-iteration-count: var(--mac-iterations, 2);
   animation-timing-function: linear;
   animation-fill-mode: forwards;
 }

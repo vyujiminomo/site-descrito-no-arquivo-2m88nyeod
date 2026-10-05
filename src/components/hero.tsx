@@ -15,13 +15,13 @@ export function Hero() {
   const [skipped, setSkipped] = useState(prefersReducedMotion)
   const [showDetails, setShowDetails] = useState(false)
 
-  // Safety timer: 2 iterations * 4.5s = 9.0s. If CSS animationend event doesn't fire
-  // (e.g. background tab, browser throttling, or rendering edge case), guarantee transition to 'name'
+  // Deterministic transition: exactly 2 cycles of 4.5s = 9.0s.
+  // Guarantees sequence progression even if animationend is blocked or dropped by the browser.
   useEffect(() => {
     if (phase !== 'intro' || skipped) return
     const timer = setTimeout(() => {
       setPhase('name')
-    }, 9500)
+    }, 9000)
     return () => clearTimeout(timer)
   }, [phase, skipped])
 

@@ -1,12 +1,11 @@
 /* Global styles - Theme, font, utilities, animations and global components */
+@import './index.css';
 
 /* Fonts loaded via index.html (Space Grotesk & JetBrains Mono) */
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-@import './index.css';
 
 @layer base {
   :root {

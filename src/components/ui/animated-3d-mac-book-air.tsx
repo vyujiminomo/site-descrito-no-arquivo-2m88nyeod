@@ -24,7 +24,7 @@ const Macbook: React.FC<MacbookProps> = ({
   // custom-animate-keys applies the animation.
 
   const timing = {
-    '--mac-iterations': String(iterations),
+    '--mac-iterations': iterations === 'infinite' ? 'infinite' : String(iterations),
     '--mac-duration': `${duration}s`,
   } as React.CSSProperties
 

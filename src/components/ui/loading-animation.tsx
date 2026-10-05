@@ -87,7 +87,7 @@ export const KineticTypographyLoader = ({
         ref={loaderTextRef}
         aria-label={words[words.length - 1]}
         className={cn(
-          'text-4xl sm:text-6xl lg:text-8xl font-extrabold text-white whitespace-nowrap',
+          'text-4xl sm:text-6xl lg:text-8xl font-extrabold text-neutral-950 dark:text-white whitespace-nowrap transition-colors duration-300',
           className,
         )}
       ></h1>

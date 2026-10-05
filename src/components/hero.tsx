@@ -1,13 +1,17 @@
 import { useEffect, useState } from 'react'
-import { ChevronDown } from 'lucide-react'
+import { ChevronDown, Moon, Sun } from 'lucide-react'
 import { Macbook } from '@/components/ui/animated-3d-mac-book-air'
 import { KineticTypographyLoader } from '@/components/ui/loading-animation'
+import { useTheme } from '@/hooks/use-theme'
 import { cn } from '@/lib/utils'
 
 const prefersReducedMotion = () =>
   typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
 export function Hero() {
+  const { theme, toggleTheme } = useTheme()
+  const isLight = theme === 'light'
+
   // "intro": the MacBook opens and closes; "name": last opening finished, name assembles
   const [phase, setPhase] = useState<'intro' | 'name'>(() =>
     prefersReducedMotion() ? 'name' : 'intro',
@@ -32,13 +36,20 @@ export function Hero() {
   }, [phase])
 
   return (
-    <section className="relative flex min-h-svh flex-col items-center justify-center overflow-hidden bg-black px-4">
+    <section className="relative flex min-h-svh flex-col items-center justify-center overflow-hidden bg-white text-neutral-900 transition-colors duration-300 dark:bg-black dark:text-neutral-100 px-4">
       {/* Background details */}
-      <div aria-hidden className="bg-grid pointer-events-none absolute inset-0" />
       <div
         aria-hidden
         className={cn(
-          'pointer-events-none absolute left-1/2 top-1/2 h-[520px] w-[520px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-cyan-500/15 blur-[140px] transition-opacity duration-[2000ms]',
+          'pointer-events-none absolute inset-0',
+          isLight ? 'bg-grid-light' : 'bg-grid',
+        )}
+      />
+      <div
+        aria-hidden
+        className={cn(
+          'pointer-events-none absolute left-1/2 top-1/2 h-[520px] w-[520px] -translate-x-1/2 -translate-y-1/2 rounded-full transition-opacity duration-[2000ms]',
+          isLight ? 'bg-sky-500/10 blur-[130px]' : 'bg-white/10 blur-[140px]',
           phase === 'name' ? 'opacity-100' : 'opacity-40',
         )}
       />
@@ -79,13 +90,35 @@ export function Hero() {
 
       <p
         className={cn(
-          'relative z-10 mt-6 font-mono text-xs uppercase tracking-[0.3em] text-neutral-400 transition-all duration-1000 sm:text-sm',
+          'relative z-10 mt-6 font-mono text-xs uppercase tracking-[0.3em] text-neutral-600 dark:text-neutral-400 transition-all duration-1000 sm:text-sm',
           showDetails ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0',
         )}
       >
-        Dev <span className="text-cyan-400">·</span> 13 anos{' '}
-        <span className="text-cyan-400">·</span> IA no dia a dia
+        Dev <span className="text-neutral-400 dark:text-neutral-500">·</span> 13 anos{' '}
+        <span className="text-neutral-400 dark:text-neutral-500">·</span> IA no dia a dia
       </p>
+
+      {/* Floating Theme Toggle (sempre acessível, inclusive no mobile) */}
+      <div className="absolute top-4 right-4 z-30 sm:top-6 sm:right-6">
+        <button
+          type="button"
+          onClick={toggleTheme}
+          aria-label={isLight ? 'Mudar para tema escuro' : 'Mudar para tema claro'}
+          className="group flex items-center gap-2 rounded-full border border-neutral-300 bg-white/80 px-3 py-1.5 font-mono text-[11px] font-medium uppercase tracking-wider text-neutral-700 shadow-sm backdrop-blur transition-all hover:border-neutral-400 hover:text-black dark:border-neutral-800 dark:bg-neutral-900/80 dark:text-neutral-300 dark:hover:border-neutral-600 dark:hover:text-white"
+        >
+          {isLight ? (
+            <>
+              <Moon className="size-3.5 text-neutral-700 transition-transform group-hover:-rotate-12 dark:text-neutral-300" />
+              <span>TEMA: CLARO</span>
+            </>
+          ) : (
+            <>
+              <Sun className="size-3.5 text-amber-400 transition-transform group-hover:rotate-45" />
+              <span>TEMA: ESCURO</span>
+            </>
+          )}
+        </button>
+      </div>
 
       {phase === 'intro' && (
         <button
@@ -93,7 +126,7 @@ export function Hero() {
             setSkipped(true)
             setPhase('name')
           }}
-          className="absolute bottom-8 right-6 z-10 font-mono sm:bottom-14 sm:right-12 text-[11px] uppercase tracking-widest text-neutral-600 transition-colors hover:text-neutral-300"
+          className="absolute bottom-8 right-6 z-10 font-mono sm:bottom-14 sm:right-12 text-[11px] uppercase tracking-widest text-neutral-500 hover:text-neutral-900 dark:text-neutral-600 dark:hover:text-neutral-300 transition-colors"
         >
           Pular intro →
         </button>
@@ -103,7 +136,7 @@ export function Hero() {
         href="#sobre"
         aria-label="Rolar para baixo"
         className={cn(
-          'absolute bottom-8 left-1/2 flex -translate-x-1/2 flex-col items-center gap-1 font-mono text-[10px] uppercase tracking-[0.3em] text-neutral-500 transition-opacity duration-1000 hover:text-white',
+          'absolute bottom-8 left-1/2 flex -translate-x-1/2 flex-col items-center gap-1 font-mono text-[10px] uppercase tracking-[0.3em] text-neutral-500 transition-all duration-1000 hover:text-neutral-900 dark:text-neutral-500 dark:hover:text-white',
           showDetails ? 'opacity-100' : 'pointer-events-none opacity-0',
         )}
       >
@@ -115,16 +148,19 @@ export function Hero() {
 }
 
 function HudCorners() {
-  const label = 'font-mono text-[10px] uppercase tracking-[0.25em] text-neutral-600'
+  const label =
+    'font-mono text-[10px] uppercase tracking-[0.25em] text-neutral-500 dark:text-neutral-600'
+  const cornerBorder = 'border-neutral-300 dark:border-neutral-700'
   return (
     <div aria-hidden className="pointer-events-none absolute inset-0 hidden p-6 sm:block">
-      <span className="absolute left-6 top-6 h-4 w-4 border-l border-t border-neutral-700" />
-      <span className="absolute right-6 top-6 h-4 w-4 border-r border-t border-neutral-700" />
-      <span className="absolute bottom-6 left-6 h-4 w-4 border-b border-l border-neutral-700" />
-      <span className="absolute bottom-6 right-6 h-4 w-4 border-b border-r border-neutral-700" />
+      <span className={cn('absolute left-6 top-6 h-4 w-4 border-l border-t', cornerBorder)} />
+      <span className={cn('absolute right-6 top-6 h-4 w-4 border-r border-t', cornerBorder)} />
+      <span className={cn('absolute bottom-6 left-6 h-4 w-4 border-b border-l', cornerBorder)} />
+      <span className={cn('absolute bottom-6 right-6 h-4 w-4 border-b border-r', cornerBorder)} />
       <span className={cn(label, 'absolute left-12 top-6')}>BF / Portfólio</span>
-      <span className={cn(label, 'absolute right-12 top-6 flex items-center gap-2')}>
-        <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-emerald-400" /> Online
+      <span className={cn(label, 'absolute right-40 top-6 flex items-center gap-2')}>
+        <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-emerald-500 dark:bg-white" />{' '}
+        Online
       </span>
       <span className={cn(label, 'absolute bottom-6 left-12')}>v1.0 — 2026</span>
     </div>

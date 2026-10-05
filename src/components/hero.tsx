@@ -15,6 +15,16 @@ export function Hero() {
   const [skipped, setSkipped] = useState(prefersReducedMotion)
   const [showDetails, setShowDetails] = useState(false)
 
+  // Safety timer: 2 iterations * 4.5s = 9.0s. If CSS animationend event doesn't fire
+  // (e.g. background tab, browser throttling, or rendering edge case), guarantee transition to 'name'
+  useEffect(() => {
+    if (phase !== 'intro' || skipped) return
+    const timer = setTimeout(() => {
+      setPhase('name')
+    }, 9500)
+    return () => clearTimeout(timer)
+  }, [phase, skipped])
+
   useEffect(() => {
     if (phase !== 'name') return
     const t = setTimeout(() => setShowDetails(true), 1600)
@@ -28,7 +38,7 @@ export function Hero() {
       <div
         aria-hidden
         className={cn(
-          'pointer-events-none absolute left-1/2 top-1/2 h-[520px] w-[520px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-violet-600/20 blur-[140px] transition-opacity duration-[2000ms]',
+          'pointer-events-none absolute left-1/2 top-1/2 h-[520px] w-[520px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-cyan-500/15 blur-[140px] transition-opacity duration-[2000ms]',
           phase === 'name' ? 'opacity-100' : 'opacity-40',
         )}
       />
@@ -73,8 +83,8 @@ export function Hero() {
           showDetails ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0',
         )}
       >
-        Dev <span className="text-violet-400">·</span> 13 anos{' '}
-        <span className="text-violet-400">·</span> IA no dia a dia
+        Dev <span className="text-cyan-400">·</span> 13 anos{' '}
+        <span className="text-cyan-400">·</span> IA no dia a dia
       </p>
 
       {phase === 'intro' && (

@@ -47,6 +47,7 @@ const Macbook: React.FC<MacbookProps> = ({
           // animationend bubbles up from every animated child; only react to our own
           if (e.target === e.currentTarget) onAnimationComplete?.()
         }}
+        data-testid="macbook-inner"
       >
         {/* Screen */}
         {/*

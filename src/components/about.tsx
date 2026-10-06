@@ -1,5 +1,5 @@
 import type { LucideIcon } from 'lucide-react'
-import { Bot, Layers, Mail, MessageCircle, Rocket, Sparkles } from 'lucide-react'
+import { ArrowUpRight, Bot, Layers, Mail, MessageCircle, Rocket, Sparkles } from 'lucide-react'
 import photoFormal from '@/assets/a5ea610a-7605-4498-aec2-4b9c9513faa8-eff22.jpeg'
 import photoCasual from '@/assets/img0173-dab53.jpeg'
 
@@ -224,9 +224,87 @@ export function About() {
           ))}
         </div>
 
-        {/* 04 — CONTATO */}
+        {/* 04 — PROJETOS */}
         <p className="reveal mt-28 font-mono text-xs uppercase tracking-[0.3em] text-neutral-500 dark:text-neutral-400">
-          04 — Contato
+          04 — Projetos
+        </p>
+
+        <div className="mt-8 divide-y divide-neutral-200 border-y border-neutral-200 dark:divide-neutral-900 dark:border-neutral-900">
+          {/* Projeto 01 — IA Experts */}
+          <a
+            href="https://vitoryuji.com/iaexperts"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="reveal group flex flex-col gap-4 py-8 transition-colors duration-300 hover:bg-neutral-100/60 dark:hover:bg-neutral-950/50 sm:flex-row sm:items-baseline sm:gap-8 sm:py-10"
+          >
+            {/* Número */}
+            <div className="flex items-center gap-3 font-mono text-sm sm:w-28 sm:flex-shrink-0">
+              <span className="text-neutral-400 transition-colors duration-300 group-hover:text-sky-600 dark:text-neutral-600 dark:group-hover:text-cyan-400">
+                01
+              </span>
+            </div>
+
+            {/* Título e indicador de link */}
+            <div className="sm:w-80 sm:flex-shrink-0">
+              <div className="flex items-center gap-2">
+                <h3 className="text-xl font-medium text-neutral-900 transition-colors duration-300 group-hover:text-sky-600 dark:text-white dark:group-hover:text-cyan-400 sm:text-2xl">
+                  IA Experts
+                </h3>
+                <ArrowUpRight
+                  className="size-5 text-neutral-400 transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-sky-600 dark:text-neutral-500 dark:group-hover:text-cyan-400"
+                  strokeWidth={1.75}
+                />
+              </div>
+              <p className="mt-1 font-mono text-xs text-neutral-500 dark:text-neutral-400">
+                Site e plataforma de ensino de IA
+              </p>
+            </div>
+
+            {/* Descrição em texto corrido */}
+            <div className="flex-1">
+              <p className="text-base leading-relaxed text-neutral-600 transition-colors duration-300 group-hover:text-neutral-900 dark:text-neutral-400 dark:group-hover:text-neutral-300 sm:dark:text-neutral-500">
+                projeto ajudando profissionais com mais de 40 anos a dominar inteligência
+                artificial.
+              </p>
+            </div>
+          </a>
+
+          {/* Projeto 02 — RoboJim */}
+          <div className="reveal group flex flex-col gap-4 py-8 transition-colors duration-300 hover:bg-neutral-100/60 dark:hover:bg-neutral-950/50 sm:flex-row sm:items-baseline sm:gap-8 sm:py-10">
+            {/* Número */}
+            <div className="flex items-center gap-3 font-mono text-sm sm:w-28 sm:flex-shrink-0">
+              <span className="text-neutral-400 transition-colors duration-300 group-hover:text-sky-600 dark:text-neutral-600 dark:group-hover:text-cyan-400">
+                02
+              </span>
+            </div>
+
+            {/* Título e Marcação */}
+            <div className="sm:w-80 sm:flex-shrink-0">
+              <div className="flex flex-wrap items-center gap-2.5">
+                <h3 className="text-xl font-medium text-neutral-900 transition-colors duration-300 group-hover:text-sky-600 dark:text-white dark:group-hover:text-cyan-400 sm:text-2xl">
+                  RoboJim
+                </h3>
+                <span className="rounded-full border border-sky-300 bg-sky-50 px-2.5 py-0.5 font-mono text-[10px] uppercase tracking-wider text-sky-700 dark:border-cyan-500/30 dark:bg-cyan-950/40 dark:text-cyan-300">
+                  em desenvolvimento
+                </span>
+              </div>
+              <p className="mt-1 font-mono text-xs text-neutral-500 dark:text-neutral-400">
+                Campeonato de Robótica 2026
+              </p>
+            </div>
+
+            {/* Descrição em texto corrido */}
+            <div className="flex-1">
+              <p className="text-base leading-relaxed text-neutral-600 transition-colors duration-300 group-hover:text-neutral-900 dark:text-neutral-400 dark:group-hover:text-neutral-300 sm:dark:text-neutral-500">
+                projeto de robótica para o campeonato de 2026, marcado como "em desenvolvimento".
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* 05 — CONTATO */}
+        <p className="reveal mt-28 font-mono text-xs uppercase tracking-[0.3em] text-neutral-500 dark:text-neutral-400">
+          05 — Contato
         </p>
         <h3 className="reveal mt-4 text-2xl font-medium text-neutral-900 dark:text-white sm:text-4xl">
           Vamos construir algo juntos?
